@@ -19,7 +19,7 @@ namespace DrawStuff
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Texture2D squareTexture;
-        Color colors = new Color
+        Color colors = new Color();
        
         public Game1()
         {
