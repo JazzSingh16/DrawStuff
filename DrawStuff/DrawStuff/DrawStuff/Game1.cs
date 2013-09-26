@@ -18,8 +18,9 @@ namespace DrawStuff
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
-
+        Texture2D squareTexture;
+        Color colors = new Color
+       
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -37,7 +38,7 @@ namespace DrawStuff
             // TODO: Add your initialization logic here
 
             base.Initialize();
-            squareTexture = Content.Load<Texture2D>("Square");
+           
         }
 
         /// <summary>
@@ -48,6 +49,7 @@ namespace DrawStuff
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            squareTexture = Content.Load<Texture2D>("Square");
 
             // TODO: use this.Content to load your game content here
         }
@@ -81,6 +83,13 @@ namespace DrawStuff
         public void DrawCheckerBoard()
         {
             
+        }
+
+        public void DrawBlank()
+        {
+            spriteBatch.Begin();
+            spriteBatch.Draw(squareTexture, Vector2, color.White);
+            spriteBatch.End();
         }
 
 
