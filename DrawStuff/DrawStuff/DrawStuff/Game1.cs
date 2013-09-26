@@ -19,6 +19,7 @@ namespace DrawStuff
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -36,6 +37,7 @@ namespace DrawStuff
             // TODO: Add your initialization logic here
 
             base.Initialize();
+            squareTexture = Content.Load<Texture2D>("Square");
         }
 
         /// <summary>
@@ -75,6 +77,13 @@ namespace DrawStuff
             base.Update(gameTime);
         }
 
+
+        public void DrawCheckerBoard()
+        {
+            
+        }
+
+
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
@@ -84,6 +93,11 @@ namespace DrawStuff
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+            // DrawBlankScreen();
+            DrawCheckerBoard();
+            // DrawRainbow();
+            // DrawCrazyMagicSquares();
+
 
             base.Draw(gameTime);
         }
