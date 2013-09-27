@@ -19,7 +19,7 @@ namespace DrawStuff
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Texture2D squareTexture;
-        Color colors = new Color();
+        Color color = new Color();
        
         public Game1()
         {
@@ -50,6 +50,8 @@ namespace DrawStuff
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             squareTexture = Content.Load<Texture2D>("Square");
+
+           
 
             // TODO: use this.Content to load your game content here
         }
@@ -88,7 +90,7 @@ namespace DrawStuff
         public void DrawBlank()
         {
             spriteBatch.Begin();
-            spriteBatch.Draw(squareTexture, Vector2, color.White);
+            spriteBatch.Draw(squareTexture, Vector2.Zero, Color.White);
             spriteBatch.End();
         }
 
@@ -99,7 +101,7 @@ namespace DrawStuff
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.White);
 
             // TODO: Add your drawing code here
             // DrawBlankScreen();
