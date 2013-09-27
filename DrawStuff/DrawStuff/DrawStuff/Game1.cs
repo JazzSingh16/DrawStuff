@@ -19,7 +19,8 @@ namespace DrawStuff
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Texture2D squareTexture;
-        Color color = new Color();
+        Color Color = new Color();
+        
        
         public Game1()
         {
@@ -51,6 +52,7 @@ namespace DrawStuff
             spriteBatch = new SpriteBatch(GraphicsDevice);
             squareTexture = Content.Load<Texture2D>("Square");
 
+            
            
 
             // TODO: use this.Content to load your game content here
@@ -82,17 +84,27 @@ namespace DrawStuff
         }
 
 
-        public void DrawCheckerBoard()
-        {
-            
-        }
+        //public void DrawRainbow()
+        //{
+          
+        //}
 
         public void DrawBlank()
         {
             spriteBatch.Begin();
             spriteBatch.Draw(squareTexture, Vector2.Zero, Color.White);
             spriteBatch.End();
+
+            for (int x = 0; x < squareTexture.Width; x++)
+            {
+                for (int y = 0; y < squareTexture.Height; y++) 
+                {
+
+                }
+            }
+
         }
+        
 
 
         /// <summary>
@@ -101,11 +113,11 @@ namespace DrawStuff
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.White);
+            GraphicsDevice.Clear(Color.Gray);
 
             // TODO: Add your drawing code here
-            // DrawBlankScreen();
-            DrawCheckerBoard();
+             DrawBlank();
+            //DrawCheckerBoard();
             // DrawRainbow();
             // DrawCrazyMagicSquares();
 
