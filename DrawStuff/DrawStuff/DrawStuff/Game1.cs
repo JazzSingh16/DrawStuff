@@ -83,14 +83,8 @@ namespace DrawStuff
             base.Update(gameTime);
         }
 
-
-        //public void DrawRainbow()
-        //{
-          
-        //}
-
         public void DrawBlank()
-        {
+       {
             spriteBatch.Begin();
             spriteBatch.Draw(squareTexture, Vector2.Zero, Color.White);
             spriteBatch.End();
@@ -104,7 +98,24 @@ namespace DrawStuff
             }
 
         }
-        
+        public void DrawCheckerboard()
+        {
+            for (int x = 0; x < this.Window.ClientBounds.Width / 15; x++)
+            {
+                for (int y = 0; y < this.Window.ClientBounds.Height / 15; y++)
+                {
+                    if ((x + y) % 2 == 0)
+                    {
+                        spriteBatch.Draw(square, new Vector2(x * 15, y * 15), Color.Black);
+                    }
+                    else
+                    {
+                        spriteBatch.Draw(square, new Vector2(x * 15, y * 15), Color.White);
+                    }
+                }
+            }
+        }
+  
 
 
         /// <summary>
@@ -116,7 +127,8 @@ namespace DrawStuff
             GraphicsDevice.Clear(Color.Gray);
 
             // TODO: Add your drawing code here
-             DrawBlank();
+             
+            DrawBlank();
             //DrawCheckerBoard();
             // DrawRainbow();
             // DrawCrazyMagicSquares();
