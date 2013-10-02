@@ -17,11 +17,10 @@ namespace DrawStuff
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
+        Texture2D square;
         SpriteBatch spriteBatch;
-        Texture2D squareTexture;
-        Color Color = new Color();
-        
-       
+        Random rand = new Random();
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -31,15 +30,13 @@ namespace DrawStuff
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
         /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
+        /// related content. Calling base.Initialize will enumerate through any components
         /// and initialize them as well.
         /// </summary>
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
             base.Initialize();
-           
         }
 
         /// <summary>
@@ -50,11 +47,7 @@ namespace DrawStuff
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            squareTexture = Content.Load<Texture2D>("Square");
-
-            
-           
-
+            square = Content.Load<Texture2D>(@"square");
             // TODO: use this.Content to load your game content here
         }
 
@@ -79,25 +72,9 @@ namespace DrawStuff
                 this.Exit();
 
             // TODO: Add your update logic here
-
             base.Update(gameTime);
         }
 
-        public void DrawBlank()
-       {
-            spriteBatch.Begin();
-            spriteBatch.Draw(squareTexture, Vector2.Zero, Color.White);
-            spriteBatch.End();
-
-            for (int x = 0; x < squareTexture.Width; x++)
-            {
-                for (int y = 0; y < squareTexture.Height; y++) 
-                {
-
-                }
-            }
-
-        }
         public void DrawCheckerboard()
         {
             for (int x = 0; x < this.Window.ClientBounds.Width / 15; x++)
@@ -106,33 +83,46 @@ namespace DrawStuff
                 {
                     if ((x + y) % 2 == 0)
                     {
-                        spriteBatch.Draw(square, new Vector2(x * 15, y * 15), Color.Black);
+                        //spriteBatch.Draw(square, new Vector2(x * 15 + rand.Next(-1,1), y * 15), Color.Red);
+                        Rectangle rect = new Rectangle(x * 15 + (int)(Math.Sin((double)x) * 2), y * 15, 15, 15);
+                        spriteBatch.Draw(square, rect, Color.Cyan);
                     }
                     else
                     {
-                        spriteBatch.Draw(square, new Vector2(x * 15, y * 15), Color.White);
+                        spriteBatch.Draw(square, new Vector2(x * 15, y * 15), Color.Black);
                     }
                 }
             }
         }
-  
-
-
+        public void DrawClearScreen()
+        {
+            for (int x = 0; x <= this.Window.ClientBounds.Width / 15; x++)
+            {
+                for (int y = 0; y <= this.Window.ClientBounds.Height / 15; y++)
+                {
+                    spriteBatch.Draw(square, new Vector2(x * 15, y * 15), Color.BurlyWood);
+                }
+            }
+        }
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Gray);
+            GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-             
-            DrawBlank();
-            //DrawCheckerBoard();
-            // DrawRainbow();
-            // DrawCrazyMagicSquares();
 
+            spriteBatch.Begin();
+            DrawClearScreen();
+            spriteBatch.End();
+
+            spriteBatch.Begin();
+            DrawCheckerboard();
+            spriteBatch.End();
+            // DrawRainbow();
+            // DrawCrazySquares();
 
             base.Draw(gameTime);
         }
