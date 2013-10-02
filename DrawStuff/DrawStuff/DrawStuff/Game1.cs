@@ -21,6 +21,7 @@ namespace DrawStuff
         SpriteBatch spriteBatch;
         Random rand = new Random();
 
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -71,6 +72,7 @@ namespace DrawStuff
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
+         
             // TODO: Add your update logic here
             base.Update(gameTime);
         }
@@ -83,7 +85,7 @@ namespace DrawStuff
                 {
                     if ((x + y) % 2 == 0)
                     {
-                        //spriteBatch.Draw(square, new Vector2(x * 15 + rand.Next(-1,1), y * 15), Color.Red);
+
                         Rectangle rect = new Rectangle(x * 15 + (int)(Math.Sin((double)x) * 2), y * 15, 15, 15);
                         spriteBatch.Draw(square, rect, Color.Cyan);
                     }
@@ -94,13 +96,40 @@ namespace DrawStuff
                 }
             }
         }
+        public void DrawRainbow()
+        {
+            int a;
+            int x = 0;
+            int y = 0;
+            Rectangle Rainbow = new Rectangle(x, y, 115, 800);
+            for (a = 0; a <= 6; a++)
+            {
+                if (a == 0)
+                    spriteBatch.Draw(square, Rainbow, Color.Red);
+                else if (a == 1)
+                    spriteBatch.Draw(square, Rainbow, Color.Orange);
+                else if (a == 2)
+                    spriteBatch.Draw(square, Rainbow, Color.Yellow);
+                else if (a == 3)
+                    spriteBatch.Draw(square, Rainbow, Color.Green);
+                else if (a == 4)
+                    spriteBatch.Draw(square, Rainbow, Color.Blue);
+                else if (a == 5)
+                    spriteBatch.Draw(square, Rainbow, Color.Indigo);
+                else if (a == 6)
+                    spriteBatch.Draw(square, Rainbow, Color.Violet);
+                Rainbow.X += 115;
+            }
+        }
+
+
         public void DrawClearScreen()
         {
             for (int x = 0; x <= this.Window.ClientBounds.Width / 15; x++)
             {
                 for (int y = 0; y <= this.Window.ClientBounds.Height / 15; y++)
                 {
-                    spriteBatch.Draw(square, new Vector2(x * 15, y * 15), Color.BurlyWood);
+                    spriteBatch.Draw(square, new Vector2(x * 15, y * 15), Color.White);
                 }
             }
         }
@@ -110,21 +139,30 @@ namespace DrawStuff
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.White);
 
             // TODO: Add your drawing code here
 
-            spriteBatch.Begin();
-            DrawClearScreen();
-            spriteBatch.End();
+         
 
-            spriteBatch.Begin();
-            DrawCheckerboard();
-            spriteBatch.End();
-            // DrawRainbow();
-            // DrawCrazySquares();
+                    spriteBatch.Begin();
+                    //DrawClearScreen();
+                    spriteBatch.End();
 
-            base.Draw(gameTime);
+                    spriteBatch.Begin();
+                    // DrawCheckerboard();
+                    spriteBatch.End();
+
+                    spriteBatch.Begin();
+                    DrawRainbow();
+                    spriteBatch.End();
+
+                    spriteBatch.Begin();
+                    // DrawCrazySquares()
+                    spriteBatch.End();
+
+
+                    base.Draw(gameTime);
+            }
         }
     }
-}
