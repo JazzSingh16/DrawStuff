@@ -20,6 +20,7 @@ namespace DrawStuff
         Texture2D square;
         SpriteBatch spriteBatch;
         Random rand = new Random();
+        Rectangle[] rect = new Rectangle[90];
 
 
         public Game1()
@@ -49,6 +50,13 @@ namespace DrawStuff
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             square = Content.Load<Texture2D>(@"square");
+
+            for (int i = 0; i < 100; i++)
+            {
+                int RandX = random.Next(0, 700);
+                int RandY = random.Next(0, 400);
+                Rect[i] = new Rect(RandX, RandY, i + 1, i + 1);
+            }
             // TODO: use this.Content to load your game content here
         }
 
@@ -76,6 +84,7 @@ namespace DrawStuff
             // TODO: Add your update logic here
             base.Update(gameTime);
         }
+
 
         public void DrawCheckerboard()
         {
@@ -154,11 +163,11 @@ namespace DrawStuff
                     spriteBatch.End();
 
                     spriteBatch.Begin();
-                    DrawRainbow();
+                    //DrawRainbow();
                     spriteBatch.End();
 
                     spriteBatch.Begin();
-                    // DrawCrazySquares()
+                     DrawCrazySquares();
                     spriteBatch.End();
 
 
