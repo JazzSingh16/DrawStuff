@@ -19,9 +19,8 @@ namespace DrawStuff
         GraphicsDeviceManager graphics;
         Texture2D square;
         SpriteBatch spriteBatch;
-        Random rand = new Random();
         Rectangle[] rect = new Rectangle[90];
-
+        int CurrentScreen = 1;
 
         public Game1()
         {
@@ -50,12 +49,14 @@ namespace DrawStuff
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             square = Content.Load<Texture2D>(@"square");
+            Random random = new Random();
+
 
             for (int i = 0; i < 100; i++)
             {
                 int RandX = random.Next(0, 700);
                 int RandY = random.Next(0, 400);
-                Rect[i] = new Rect(RandX, RandY, i + 1, i + 1);
+                rect[i] = new Rectangle(RandX, RandY, i + 1, i + 1);
             }
             // TODO: use this.Content to load your game content here
         }
@@ -79,8 +80,25 @@ namespace DrawStuff
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
+            KeyboardState kb = Keyboard.GetState();
 
-         
+            if (kb.IsKeyDown(Keys.D1))
+            {
+                CurrentScreen = 1;
+            }
+            else if (kb.IsKeyDown(Keys.D2))
+            {
+                CurrentScreen = 2;
+            }
+            else if (kb.IsKeyDown(Keys.D3))
+            {
+                CurrentScreen = 3;
+            }
+            else if (kb.IsKeyDown(Keys.D4))
+            {
+                CurrentScreen = 4;
+            }
+
             // TODO: Add your update logic here
             base.Update(gameTime);
         }
@@ -131,6 +149,15 @@ namespace DrawStuff
             }
         }
 
+        public void DrawCrazySquares()
+        {
+
+            Random random = new Random();
+            for (int i = 0; i < 100; i++)
+            {
+                spriteBatch.Draw(square, rect[i], Color.Yellow);
+            }
+        }
 
         public void DrawClearScreen()
         {
@@ -152,25 +179,15 @@ namespace DrawStuff
 
             // TODO: Add your drawing code here
 
-         
 
-                    spriteBatch.Begin();
-                    //DrawClearScreen();
+            switch (CurrentScreen)
+            {
+                case 1: DrawClearScreen(); break;
+                case 2: DrawCheckerboard(); break;
+                case 3: DrawRainbow(); break;
+                case 4: DrawCrazySquares(); break;
+            }
                     spriteBatch.End();
-
-                    spriteBatch.Begin();
-                    // DrawCheckerboard();
-                    spriteBatch.End();
-
-                    spriteBatch.Begin();
-                    //DrawRainbow();
-                    spriteBatch.End();
-
-                    spriteBatch.Begin();
-                     DrawCrazySquares();
-                    spriteBatch.End();
-
-
                     base.Draw(gameTime);
             }
         }
